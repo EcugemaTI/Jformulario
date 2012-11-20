@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5.0">
+      <name>formulario</name>
+      <creationDate>24/01/2012</creationDate>  
+      <author>Fabio Bazurto</author>
+      <authorEmail>fbazurto@pycca.com</authorEmail>
+      <authorUrl>http://sableypistola.blogspot.com</authorUrl>
+      <copyright>Copyright Info</copyright>
+      <license>License Info</license>
+      <version>1.0BETA</version>
+      <description>Componente de validacie formularios</description>
+      <install>
+	<sql>
+		<file  driver="mysql" charset="utf8">sql/install.sql</file>
+	</sql>
+       </install>
+       <uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8" >sql/uninstall.sql</file>
+		</sql>
+         </uninstall>	
+      
+      <administration>
+            <menu>Formularios</menu>
+            <submenu>
+                  <menu link="option=com_formulario&amp;task=indice&amp;controller=formularios" >Crear formulario</menu>
+                  <menu link="option=com_formulario&amp;task=indice&amp;controller=campos">Crear campos</menu>
+            </submenu>
+            <files folder="Admin">
+	    <filename>index.html</filename>
+	    <filename component="admin.formulario.php">admin.formulario.php</filename>
+	    <folder>views</folder>
+	    <folder>controllers</folder>
+	    <folder>sql</folder>
+            </files>
+      </administration>
+
+</install>
