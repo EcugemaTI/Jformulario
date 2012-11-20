@@ -21,17 +21,16 @@
          </uninstall>	
       
       <administration>
-            <menu>Formularios</menu>
-            <submenu>
-                  <menu link="option=com_formulario&amp;task=indice&amp;controller=formularios" >Crear formulario</menu>
-                  <menu link="option=com_formulario&amp;task=indice&amp;controller=campos">Crear campos</menu>
-            </submenu>
+            <menu link="option=com_formulario&amp;task=indice&amp;controller=formularios">Formularios</menu>
+
             <files folder="Admin">
 	    <filename>index.html</filename>
 	    <filename component="admin.formulario.php">admin.formulario.php</filename>
 	    <folder>views</folder>
 	    <folder>controllers</folder>
 	    <folder>sql</folder>
+	    <folder>models</folder>
+	    <folder>tables</folder>
             </files>
       </administration>
 

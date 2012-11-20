@@ -1,7 +1,7 @@
 <?php
 /**
  * Hellos Model for Hello World Component
- *
+ * 
  * @package    Joomla.Tutorials
  * @subpackage Components
  * @link http://docs.joomla.org/Developing_a_Model-View-Controller_Component_-_Part_4
@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.model' );
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class adminformularioModelformulario extends JModel
+class adminformularioModelcampo extends JModel
 {
 	/**
 	 * Hellos data array
@@ -28,6 +28,7 @@ class adminformularioModelformulario extends JModel
 	 */
 	var $_data;
 	var $_id;
+	var $formulario_id;
 
 	/**
 	 * Constructor that retrieves the ID from the request
@@ -38,9 +39,12 @@ class adminformularioModelformulario extends JModel
 	function __construct()
 	{
 		parent::__construct();
-
+		
 		$array = JRequest::getVar('cid',  0, '', 'array');
+		
 		$this->setId((int)$array[0]);
+		
+		
 	}
 
 	/**
@@ -63,57 +67,28 @@ class adminformularioModelformulario extends JModel
 	 */
 	function &getData()
 	{
-
-
 		// Load the data
 		if (empty( $this->_data )) {
-			$query = ' SELECT * FROM #__formulario '.
+			$query = ' SELECT * FROM #__campos '.
 					'  WHERE id = ' . $this->_id;
-
+					
 			$this->_db->setQuery( $query );
 			$this->_data = $this->_db->loadObject();
 		}
-		if (!$this->_data)
-		{
-
+		if (!$this->_data) {
 			$this->_data = new stdClass();
 			$this->_data->id = 0;
-			$this->_data->titulo = null;
-			$this->_data->tabla_mapeo=null;
-			$this->_data->css_forma_clase=null;
-			$this->_data->usar_notificacion=false;
-			$this->_data->usar_envio=false;
-			$this->_data->email_remitente=null;
+			$this->_data->nombre = null;
+			$this->_data->etiqueta=null;
+			$this->_data->tipo=null;
+			$this->_data->combo_datos=null;
+			$this->_data->expresion_regular=null;
+			$this->_data->es_obligatorio=false;
+			$this->_data->formulario_id=0;
 		}
 		return $this->_data;
 	}
-function &getDataUno()
-	{
 
-		$this->_id = JRequest::getVar('formulario_id',  0, '', '');
-
-		// Load the data
-		if (empty( $this->_data )) {
-			$query = ' SELECT * FROM #__formulario '.
-					'  WHERE id = ' . $this->_id;
-
-			$this->_db->setQuery( $query );
-			$this->_data = $this->_db->loadObject();
-		}
-		if (!$this->_data)
-		{
-
-			$this->_data = new stdClass();
-			$this->_data->id = 0;
-			$this->_data->titulo = null;
-			$this->_data->tabla_mapeo=null;
-			$this->_data->css_forma_clase=null;
-			$this->_data->usar_notificacion=false;
-			$this->_data->usar_envio=false;
-			$this->_data->email_remitente=null;
-		}
-		return $this->_data;
-	}
 	/**
 	 * Method to store a record
 	 *
@@ -121,11 +96,11 @@ function &getDataUno()
 	 * @return	boolean	True on success
 	 */
 	function grabar()
-	{
+	{	
 		$row =& $this->getTable();
 
 		$data = JRequest::get( 'post' );
-
+		
 		// Bind the form fields to the hello table
 		if (!$row->bind($data)) {
 			$this->setError($this->_db->getErrorMsg());
@@ -137,7 +112,7 @@ function &getDataUno()
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}
-
+	
 		// Store the web link table to the database
 		if (!$row->store()) {
 			$this->setError( $row->getErrorMsg() );

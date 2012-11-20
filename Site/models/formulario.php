@@ -1,7 +1,7 @@
 <?php
 /**
  * Hellos Model for Hello World Component
- *
+ * 
  * @package    Joomla.Tutorials
  * @subpackage Components
  * @link http://docs.joomla.org/Developing_a_Model-View-Controller_Component_-_Part_4
@@ -63,19 +63,19 @@ class adminformularioModelformulario extends JModel
 	 */
 	function &getData()
 	{
-
-
+	
+	echo $this->_id;
 		// Load the data
 		if (empty( $this->_data )) {
 			$query = ' SELECT * FROM #__formulario '.
 					'  WHERE id = ' . $this->_id;
-
+				
 			$this->_db->setQuery( $query );
 			$this->_data = $this->_db->loadObject();
 		}
-		if (!$this->_data)
+		if (!$this->_data) 
 		{
-
+		
 			$this->_data = new stdClass();
 			$this->_data->id = 0;
 			$this->_data->titulo = null;
@@ -89,20 +89,20 @@ class adminformularioModelformulario extends JModel
 	}
 function &getDataUno()
 	{
-
+	
 		$this->_id = JRequest::getVar('formulario_id',  0, '', '');
-
+		
 		// Load the data
 		if (empty( $this->_data )) {
 			$query = ' SELECT * FROM #__formulario '.
 					'  WHERE id = ' . $this->_id;
-
+				
 			$this->_db->setQuery( $query );
 			$this->_data = $this->_db->loadObject();
 		}
-		if (!$this->_data)
+		if (!$this->_data) 
 		{
-
+		
 			$this->_data = new stdClass();
 			$this->_data->id = 0;
 			$this->_data->titulo = null;
@@ -121,11 +121,11 @@ function &getDataUno()
 	 * @return	boolean	True on success
 	 */
 	function grabar()
-	{
+	{	
 		$row =& $this->getTable();
 
 		$data = JRequest::get( 'post' );
-
+	
 		// Bind the form fields to the hello table
 		if (!$row->bind($data)) {
 			$this->setError($this->_db->getErrorMsg());
@@ -137,7 +137,7 @@ function &getDataUno()
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}
-
+	
 		// Store the web link table to the database
 		if (!$row->store()) {
 			$this->setError( $row->getErrorMsg() );
