@@ -33,5 +33,23 @@
 	    <folder>tables</folder>
             </files>
       </administration>
+	<params>
+		<param name="uriWsdl" type="text" size="50" default="https://" label="Uri WSDL"/>
+		<param name="usuarioWsdl" type="text" size="50" default="https://" label="Usuario"/>
+		<param name="passwordWsdl" type="text" size="50" default="https://" label="Password"/>
+		<param name="metodoWsdl" type="text" size="50" default="https://" label="Metodo"/>
+		
+	</params>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="uriWsdl" type="text" default="" label="UriWSDL" />
+				<field name="usuarioWsdl" type="text" default="" label="Usuario" />
+				<field name="passwordWsdl" type="text" default="" label="Password" />
+				<field name="metodoWsdl" type="text" default="" label="Metodo" />
+		
+			</fieldset>
+		</fields>
 
+	</config>
 </install>
