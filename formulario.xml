@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5.0">
+      <name>formulario</name>
+      <creationDate>24/01/2012</creationDate>  
+      <author>Fabio Bazurto</author>
+      <authorEmail>fbazurto@pycca.com</authorEmail>
+      <authorUrl>http://sableypistola.blogspot.com</authorUrl>
+      <copyright>Copyright Info</copyright>
+      <license>License Info</license>
+      <version>1.0BETA</version>
+      <description>Componente de validacie formularios</description>
+      <files folder="Site">
+      	    <filename>index.html</filename>
+      	    <filename component="formulario.php">formulario.php</filename>
+      	    <folder>views</folder>
+      	    <folder>controllers</folder>
+      	    <folder>sql</folder>
+      	    <folder>models</folder>
+      	    <folder>tables</folder>
+            </files>
+      <install>
+	<sql>
+		<file  driver="mysql" charset="utf8">sql/install.sql</file>
+	</sql>
+       </install>
+       <uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8" >sql/uninstall.sql</file>
+		</sql>
+         </uninstall>	
+      
+      <administration>
+            <menu link="option=com_formulario&amp;task=indice&amp;controller=formularios">Formularios</menu>
+
+            <files folder="Admin">
+	    <filename>index.html</filename>
+	    <filename component="admin.formulario.php">admin.formulario.php</filename>
+	    <folder>views</folder>
+	    <folder>elements</folder>
+	    <folder>controllers</folder>
+	    <folder>sql</folder>
+	    <folder>models</folder>
+	    <folder>tables</folder>
+            </files>
+      </administration>
+	<params>
+		<param name="uriWsdl" type="text" size="50" default="https://" label="Uri WSDL"/>
+		<param name="usuarioWsdl" type="text" size="50" default="https://" label="Usuario"/>
+		<param name="passwordWsdl" type="text" size="50" default="https://" label="Password"/>
+		<param name="metodoWsdl" type="text" size="50" default="https://" label="Metodo"/>
+		
+	</params>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="uriWsdl" type="text" default="" label="UriWSDL" />
+				<field name="usuarioWsdl" type="text" default="" label="Usuario" />
+				<field name="passwordWsdl" type="text" default="" label="Password" />
+				<field name="metodoWsdl" type="text" default="" label="Metodo" />
+		
+			</fieldset>
+		</fields>
+
+	</config>
+</install>
