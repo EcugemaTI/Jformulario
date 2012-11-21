@@ -26,5 +26,6 @@ CREATE TABLE `#__campos` (
   `formulario_id` int(11) NOT NULL  ,
   `nombre` varchar(30) NOT NULL  ,
   `clase` varchar(80) NOT NULL  ,
+  `validacion` varchar(80) NOT NULL  ,
   PRIMARY KEY  (`id`)
 )ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
