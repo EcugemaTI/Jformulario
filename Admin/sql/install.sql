@@ -25,7 +25,15 @@ CREATE TABLE `#__campos` (
   `es_obligatorio` tinyint(1) NOT NULL DEFAULT 1  ,
   `formulario_id` int(11) NOT NULL  ,
   `nombre` varchar(30) NOT NULL  ,
-  `clase` varchar(80) NOT NULL  ,
-  `validacion` varchar(80) NOT NULL  ,
+  `mensaje_validacion` varchar(200) NOT NULL  ,
+  `clase_adicional` varchar(200) NOT NULL  ,
   PRIMARY KEY  (`id`)
 )ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `#__formulario` VALUES (1,'Formulario1','datos1','','formulario.css',1,0,'Fabio Bazurto');
+
+INSERT INTO `#__campos` VALUES (1,'Nombres','texto','','[A-Z][a-zA-Z]*\\D{3}',1,1,'nombres','debe tener al menos 3 caracteres.','');
+INSERT INTO `#__campos` VALUES (2,'Apellidos','texto','','[A-Z][a-zA-Z]*\\D{3}',1,1,'apellidos','debe tener al menos 3 caracteres.','');
+INSERT INTO `#__campos` VALUES (3,'Estado Civil','lista','Soltero|S,Casado|C,Viudo|V,Cojo|O','[A-Z][a-zA-Z]*\\D{3}',1,1,'estadocivil','debe tener al menos 3 caracteres.','');
+INSERT INTO `#__campos` VALUES (4,'Correo electrónico','texto','','',1,1,'email','debe tener al menos 3 caracteres.','validate-email');

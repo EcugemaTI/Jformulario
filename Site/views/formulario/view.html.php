@@ -11,31 +11,42 @@ class formularioViewformulario extends JView
 
 	
 	$formulario		=& $this->get('Data');
-	$esNuevo		= ($formulario->id < 1);
-
 	$this->assignRef('formulario',		$formulario);
 	
+	 if(count($formulario)>0)
+	 {
+			foreach ($formulario as &$row)
+				{
+					if(strlen($row->expresion_regular)>0){
+					$validador .= "document.formvalidator.setHandler('" . $row->nombre . "', function(value) {
+												  regex=" . $row->expresion_regular . ";
+												if(regex.test(value)==0){
+													return false;
+												}
+												else
+												{
+													return true;
+												}
+											});
+											";
+											}
+				}
+	}
+	
 	$document       = JFactory::getDocument();
-        $document-> addScriptDeclaration ($this->insertarValidaciones());
+        $document-> addScriptDeclaration ($this->insertarValidaciones($validador));
 
     	parent::display($tpl);
     }
-    function insertarValidaciones(){
+    function insertarValidaciones($validador){
     	JHTML::_( 'behavior.mootools' );
-		$this->_strAjaxScript = 	<<<EOD
+		$this->_strAjaxScript = 	"
    
     window.addEvent('domready', function() {
 
-											document.formvalidator.setHandler('numerico', function(value) {
-												alert('asdfsdf');
-												  regex=/^([0-9]+)$/;
-												if(regex.test(value)==0){
-													$('errcupo').innerHTML="No es numerico.";
-													$('errcupo').addClass('invalid');
-												}
-											});
+											" . $validador . "
 								});
-EOD;
+";
 												
 return $this->_strAjaxScript;
     }

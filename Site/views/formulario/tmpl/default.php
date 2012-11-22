@@ -39,7 +39,13 @@ function myValidate(f) {
 		 <?php 
 		 if(count($this->formulario)>0){
 			foreach ($this->formulario as &$row)
-				{?>
+				{
+					/*Armo variables para usar*/
+					$requerido = ($row->es_obligatorio)?'required':'';
+					$clase_custom = strlen($row->expresion_regular)>0?'validate-' . $row->nombre:'';
+					$otras_clases = $row->clase_adicional;
+					$clase_control = $requerido . ' ' . $clase_custom . ' ' . $otras_clases;
+				?>
 				<tr>
 					<td width="100" align="right" class="key">
 						<label for="<?php echo $row->nombre?>">
@@ -48,8 +54,23 @@ function myValidate(f) {
 					</td>
 			
 					<td>
-						<input type="<?php echo $row->tipo ?>"  class="required validate-<?php echo $row->validacion ?>" name="<?php echo $row->nombre?>" id="<?php echo $row->nombre?>" size="32" maxlength="30" />
-						<?php
+						<?php switch($row->tipo){
+							case 'lista':
+								$result = explode(',',$row->combo_datos);
+								$options[] = JHTML::_('select.option',0,'--','id','descripcion');
+								foreach($result as $value) :
+									$result2 = explode('|',$value);
+									$options[] = JHTML::_('select.option',$result2[1],JText::_($result2[0]),'id','descripcion');
+								endforeach;
+								echo JHTML::_('select.genericlist',  $options, $row->nombre, "class=$clase_control" , 'id', 'descripcion');
+								break;
+							case 'texto': /* Caja de texto*/
+								?>
+								<input type="text"  class="<?php echo $clase_control;?>" name="<?php echo $row->nombre?>" id="<?php echo $row->nombre?>" size="32" maxlength="30" />
+								
+						<?php 
+								break;
+							}
 						echo ( $row->es_obligatorio)?'*':'';
 						?>
 					</td>
