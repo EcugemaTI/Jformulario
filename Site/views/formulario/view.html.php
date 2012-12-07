@@ -19,6 +19,8 @@ class formularioViewformulario extends JView
 				{
 
 
+					$css =   $row->css_nombre;
+					print_r($row);
 					if(strlen($row->expresion_regular)>0){
 					$validador .= "document.formvalidator.setHandler('" . $row->nombre . "', function(value) {
 
@@ -45,7 +47,8 @@ class formularioViewformulario extends JView
 	$document       = JFactory::getDocument();
         $document-> addScriptDeclaration ($this->insertarValidaciones($validador));
 
-	$document ->addStyleSheet( 'components' . DS . 'com_formulario' . DS . 'css' .DS . 'horizontaltable.css');
+	$document ->addStyleSheet( 'components' . DS . 'com_formulario' . DS . 'css' .DS . $css);
+
     	parent::display($tpl);
     }
     function insertarValidaciones($validador){
