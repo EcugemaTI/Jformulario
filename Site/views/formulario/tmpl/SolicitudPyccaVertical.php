@@ -35,8 +35,12 @@ function myValidate(f) {
 		<legend><h1><?php echo JText::_($this->formulario[0]->titulo); ?></h1></legend>
 <br /><br />
 <span name="errcupo" id="errcupo"></span>
-		<table class="admintable">
+		<table  class="admintable" border="0" cellpadding="8px" >
+
 		 <?php
+		 $intColperFil = 3;
+		 $intColsActualNum = 0;
+		 $currGrupo="";
 		 if(count($this->formulario)>0){
 			foreach ($this->formulario as &$row)
 				{
@@ -45,15 +49,21 @@ function myValidate(f) {
 					$clase_custom = strlen($row->expresion_regular)>0?'validate-' . $row->nombre:'';
 					$otras_clases = $row->clase_adicional;
 					$clase_control = $requerido . ' ' . $clase_custom . ' ' . $otras_clases;
+					$options=null;
+					if($row->grupo<>$currGrupo)
+						{
+							$currGrupo = $row->grupo;
+							echo "<tr><td class='filagrupo' colspan=$intColperFil>" . $currGrupo . "</td></tr>";
+						}
+				 	if($intColsActualNum==0)
+				 		echo "<tr>";
 				?>
-				<tr>
-					<td width="200" align="right" class="key">
-						<label for="<?php echo $row->nombre?>">
-							<?php echo JText::_( $row->etiqueta ); ?>:
-						</label>
-					</td>
 
-					<td>
+					<td  align="left" class="key">
+						<label for="<?php echo $row->nombre?>">
+							<?php echo JText::_( $row->etiqueta ); ?>
+						</label><br>
+
 						<?php switch($row->tipo){
 							case 'lista':
 								$result = explode(',',$row->combo_datos);
@@ -64,20 +74,42 @@ function myValidate(f) {
 								endforeach;
 								echo JHTML::_('select.genericlist',  $options, $row->nombre, "class=$clase_control" , 'id', 'descripcion');
 								break;
+							case 'check':
+								$result = explode(',',$row->combo_datos);
+								foreach($result as $value) :
+									$result2 = explode('|',$value);
+									echo "<label for='" . $result2[0] . "'>";
+									echo $result2[0];
+									echo "</label>";
+									//echo JHTML::_('grid.id',$row->nombre,$result2[1]);
+									echo "<input type=\"checkbox\"  class=\"". $clase_control  . "\" name=\"" .  $row->nombre . "[]\" id=\"" . $row->nombre . "\" value=\"" .  $result2[1] . "\" size=\"32\"  />";
+								endforeach;
+
+								break;
+							case 'calendario':
+								echo JHTML::calendar($row>fechanacimiento, $row->nombre,$row->nombre,'%d-%m-%Y',"class='" . $clase_control . "'");
+								break;
 							case 'texto': /* Caja de texto*/
 								?>
-								<input type="text"  class="<?php echo $clase_control;?>" name="<?php echo $row->nombre?>" id="<?php echo $row->nombre?>" size="32" maxlength="30" />
+								<input type="text"  class="<?php echo $clase_control;?>" name="<?php echo $row->nombre?>" id="<?php echo $row->nombre?>" size="32"  />
 
 						<?php
 								break;
 							}
 						echo ( $row->es_obligatorio)?'*':'';
-
+						echo "<br><span id='err" . $row->nombre . "' class='msgerror'></span>";
 						?>
-
+						<br/>
 					</td>
-				</tr>
-		<?php	}
+
+		<?php
+				$intColsActualNum++;
+				if($intColsActualNum>=$intColperFil){
+				 		echo "</tr>";
+				 		$intColsActualNum=0;
+				 		}
+
+			}
 		}?>
 
 	</table>
@@ -89,5 +121,5 @@ function myValidate(f) {
 <input type="hidden" name="formulario_id" value="<?php echo $this->formulario[0]->id; ?>" />
 <input type="hidden" name="task" value="grabar" />
 <input type="hidden" name="controller" value="formulario" />
-<input type="submit" name="btnGrabar" value="Grabar"  class="button validate" />
+<input type="submit" name="btnGrabar" value="Enviar"  class="button validate" />
 </form>

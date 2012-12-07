@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Solicitud Credito Directo">
+		<message>
+			<![CDATA[STANDARD ARTICLE LAYOUT DESC]]>
+		</message>
+	</layout>
+	<state>
+		<name>Layout para formulario</name>
+		<description>Presenta un formulario seleccionado de la lista</description>
+		<url addpath="/administrator/components/com_formulario/elements">
+			<param name="id" type="formulario" default="0" label="Selecciona formulario" description="Un formulario" />
+		</url>
+		<params>
+		</params>
+	</state>
+</metadata>

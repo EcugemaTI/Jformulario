@@ -43,7 +43,7 @@
 				</label>
 			</td>
 			<td>
-				<input class="text_area" type="text" name="combo_datos" id="combo_datos" size="32" maxlength="30" value="<?php echo $this->campo->combo_datos;?>" />
+				<input class="text_area" type="text" name="combo_datos" id="combo_datos" size="32" value="<?php echo $this->campo->combo_datos;?>" />
 			</td>
 			</tr><tr>
 			<td width="100" align="right" class="key">
@@ -52,7 +52,7 @@
 				</label>
 			</td>
 			<td>
-				<input class="text_area" type="text" name="expresion_regular" id="expresion_regular" size="32" maxlength="30" value="<?php echo $this->campo->expresion_regular;?>" />
+				<input class="text_area" type="text" name="expresion_regular" id="expresion_regular" size="32"  value="<?php echo $this->campo->expresion_regular;?>" />
 			</td>
 			</tr><tr>
 			<td width="100" align="right" class="key">
@@ -66,7 +66,36 @@
 				<input class="text_area" type="radio" name="es_obligatorio" id="es_obligatorio1" <?php echo (!$this->campo->es_obligatorio==true)?"checked":""; ?> value="0"/> NO
 			</td>
 			</tr>
-
+			<tr>
+			<td width="100" align="right" class="key">
+				<label for="mensaje_validacion">
+					<?php echo JText::_( 'Mensaje de validacion' ); ?>:
+				</label>
+			</td>
+			<td>
+				<input class="text_area" type="text" name="mensaje_validacion" id="mensaje_validacion" size="32"  maxlength="200" value="<?php echo $this->campo->mensaje_validacion;?>" />
+			</td>
+			</tr>
+			<tr>
+			<td width="100" align="right" class="key">
+				<label for="mensaje_validacion">
+					<?php echo JText::_( 'Clase adicional' ); ?>:
+				</label>
+			</td>
+			<td>
+				<input class="text_area" type="text" name="clase_adicional" id="clase_adicional" size="32"  maxlength="200" value="<?php echo $this->campo->clase_adicional;?>" />
+			</td>
+			</tr>
+			<tr>
+						<td width="100" align="right" class="key">
+							<label for="grupo">
+								<?php echo JText::_( 'Grupo' ); ?>:
+							</label>
+						</td>
+						<td>
+							<input class="text_area" type="text" name="grupo" id="grupo" size="32"  maxlength="200" value="<?php echo $this->campo->grupo;?>" />
+						</td>
+			</tr>
 	</table>
 	</fieldset>
 </div>

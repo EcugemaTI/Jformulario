@@ -1,0 +1,36 @@
+.col100 table.admintable
+{
+	background-color:#edeff9;
+	width:100%;
+}
+
+.col100 table.admintable label
+{
+	color:darkBlue;
+	font-size: 12px;
+	font-family:Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	//font-weight: bold;
+	line-height:11pt;
+}
+
+.col100 table.admintable tr td.filagrupo
+{
+	color:#FFFFFF;
+	font-family:Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	font-weight: bold;
+	line-height:11pt;
+	background-color:#283f6b;
+	padding:10px;
+}
+
+
+
+input.invalid {
+  background-color: #ffdddd;
+}
+
+span.msgerror {
+  background-color:#FFF7D0;
+  
+}
+   

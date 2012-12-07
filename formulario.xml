@@ -7,12 +7,13 @@
       <authorUrl>http://sableypistola.blogspot.com</authorUrl>
       <copyright>Copyright Info</copyright>
       <license>License Info</license>
-      <version>1.0BETA</version>
+      <version>1.1BETA</version>
       <description>Componente de validacie formularios</description>
       <files folder="Site">
       	    <filename>index.html</filename>
       	    <filename component="formulario.php">formulario.php</filename>
       	    <folder>views</folder>
+	    <folder>css</folder>
       	    <folder>controllers</folder>
       	    <folder>sql</folder>
       	    <folder>models</folder>
@@ -41,6 +42,8 @@
 	    <folder>sql</folder>
 	    <folder>models</folder>
 	    <folder>tables</folder>
+	    <folder>css</folder>
+	    <folder>js</folder>
             </files>
       </administration>
 	<params>

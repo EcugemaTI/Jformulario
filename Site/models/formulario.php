@@ -1,7 +1,7 @@
 <?php
 /**
  * Hellos Model for Hello World Component
- * 
+ *
  * @package    Joomla.Tutorials
  * @subpackage Components
  * @link http://docs.joomla.org/Developing_a_Model-View-Controller_Component_-_Part_4
@@ -62,19 +62,19 @@ class formularioModelformulario extends JModel
 	 */
 	function &getData()
 	{
-	
+
 
 		// Load the data
 		if (empty( $this->_data )) {
 			$query = ' SELECT * FROM #__formulario a inner join #__campos b on a.id = b.formulario_id '
-					. '  WHERE b.formulario_id = ' . $this->_id;
-				
+					. '  WHERE b.formulario_id = ' . $this->_id . ' ORDER BY grupo,b.id';
+
 			//$this->_db->setQuery( $query );
 			$this->_data = $this->_getList( $query );
 		}
-		if (!$this->_data) 
+		if (!$this->_data)
 		{
-		
+
 			$this->_data = new stdClass();
 			$this->_data->id = 0;
 			$this->_data->titulo = null;
@@ -88,19 +88,19 @@ class formularioModelformulario extends JModel
 	}
 function &getFormulario()
 	{
-	
+
 		$this->_id =  JRequest::getVar('formulario_id',0,0,0);
 		// Load the data
 		if (empty( $this->_data )) {
 			$query = ' SELECT * FROM #__formulario a  '
 					. '  WHERE a.id = ' . $this->_id;
-				
+
 			//$this->_db->setQuery( $query );
 			$this->_data = $this->_getList( $query );
 		}
-		if (!$this->_data) 
+		if (!$this->_data)
 		{
-		
+
 			$this->_data = new stdClass();
 			$this->_data->id = 0;
 			$this->_data->titulo = null;
@@ -118,16 +118,17 @@ function &getFormulario()
 	 * @access	public
 	 * @return	boolean	True on success
 	 */
-	function grabar()
-	{	
+	function grabar($respuesta)
+	{
 		JTable::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_formulario'.DS.'tables');
-		
+
 		$row =& $this->getTable('datos1');
 
 		$data = JRequest::get( 'post' );
-		print_r($data);
-		
-		// Bind the form fields to the hello table
+		$data = $respuesta;
+
+
+// Bind the form fields to the hello table
 		if (!$row->bind($data)) {
 			//$this->setError($this->_db->getErrorMsg());
 			JError::raiseError(500, $row->getError() );
@@ -139,8 +140,8 @@ function &getFormulario()
 			$this->setError($this->_db->getErrorMsg());
 			return false;
 		}
-	
-		// Store the web link table to the database
+
+// Store the web link table to the database
 		if (!$row->store()) {
 			$this->setError( $row->getErrorMsg() );
 			return false;
@@ -149,5 +150,5 @@ function &getFormulario()
 		return true;
 	}
 
-	
+
 }

@@ -45,6 +45,8 @@ function myValidate(f) {
 					$clase_custom = strlen($row->expresion_regular)>0?'validate-' . $row->nombre:'';
 					$otras_clases = $row->clase_adicional;
 					$clase_control = $requerido . ' ' . $clase_custom . ' ' . $otras_clases;
+					$options=null;
+
 				?>
 				<tr>
 					<td width="200" align="right" class="key">
@@ -64,17 +66,31 @@ function myValidate(f) {
 								endforeach;
 								echo JHTML::_('select.genericlist',  $options, $row->nombre, "class=$clase_control" , 'id', 'descripcion');
 								break;
+							case 'check':
+								$result = explode(',',$row->combo_datos);
+								foreach($result as $value) :
+									$result2 = explode('|',$value);
+									echo "<label for='" . $result2[0] . "'>";
+									echo $result2[0];
+									echo "</label>";
+									echo JHTML::_('grid.id',$row->nombre,$result2[1]);
+								endforeach;
+
+								break;
+							case 'calendario':
+								echo JHTML::calendar($row>fechanacimiento, $row->nombre,$row->nombre);
+								break;
 							case 'texto': /* Caja de texto*/
 								?>
-								<input type="text"  class="<?php echo $clase_control;?>" name="<?php echo $row->nombre?>" id="<?php echo $row->nombre?>" size="32" maxlength="30" />
+								<input type="text"  class="<?php echo $clase_control;?>" name="<?php echo $row->nombre?>" id="<?php echo $row->nombre?>" size="32"  />
 
 						<?php
 								break;
 							}
 						echo ( $row->es_obligatorio)?'*':'';
-
+						echo "<span id='err" . $row->nombre . "'></span>";
 						?>
-
+						<br/>
 					</td>
 				</tr>
 		<?php	}

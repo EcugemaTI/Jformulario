@@ -9,50 +9,60 @@ class formularioViewformulario extends JView
     function display($tpl = null)
     {
 
-	
+
 	$formulario		=& $this->get('Data');
 	$this->assignRef('formulario',		$formulario);
-	
+
 	 if(count($formulario)>0)
 	 {
 			foreach ($formulario as &$row)
 				{
+
+
 					if(strlen($row->expresion_regular)>0){
 					$validador .= "document.formvalidator.setHandler('" . $row->nombre . "', function(value) {
-												  regex=" . $row->expresion_regular . ";
+
+												  regex=" . stripslashes($row->expresion_regular) . ";
+
 												if(regex.test(value)==0){
+													$('err" . $row->nombre . "').innerHTML='" . $row->mensaje_validacion ."';
+
 													return false;
 												}
 												else
 												{
+												$('err" . $row->nombre . "').innerHTML='';
 													return true;
 												}
 											});
 											";
-											}
+
+					}
+
 				}
 	}
-	
+
 	$document       = JFactory::getDocument();
         $document-> addScriptDeclaration ($this->insertarValidaciones($validador));
 
+	$document ->addStyleSheet( 'components' . DS . 'com_formulario' . DS . 'css' .DS . 'horizontaltable.css');
     	parent::display($tpl);
     }
     function insertarValidaciones($validador){
     	JHTML::_( 'behavior.mootools' );
 		$this->_strAjaxScript = 	"
-   
+
     window.addEvent('domready', function() {
 
 											" . $validador . "
 								});
 ";
-												
+
 return $this->_strAjaxScript;
     }
     function insertarAjax(){
-		
-		
+
+
 		$this->strAjaxScript = 	<<<EOD
 									Element.implement({
 										  setFocus: function(index) {
@@ -504,6 +514,6 @@ function check_cedula( p_cedula )
 EOD;
 			return $this->strAjaxScript;
 	}
-	
+
 }
 ?>

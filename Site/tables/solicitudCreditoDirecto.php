@@ -1,7 +1,7 @@
 <?php
 /**
  * Hello World table class
- *
+ * 
  * @package    Joomla.Tutorials
  * @subpackage Components
  * @link http://docs.joomla.org/Developing_a_Model-View-Controller_Component_-_Part_4
@@ -17,7 +17,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class TableCampo extends JTable
+class TableDatos1 extends JTable
 {
 	/**
 	 * Primary Key
@@ -29,50 +29,20 @@ class TableCampo extends JTable
 	/**
 	 * @var string
 	 */
-	var $nombre = null;
+	var $fullname = null;
 
 	/**
 	 * @var string
 	 */
-	var $etiqueta = null;
+	var $campo2 = null;
 
-/**
-	 * @var string
-	 */
-	var $tipo = null;
-
-/**
-	 * @var string
-	 */
-	var $combo_datos = null;
-
-/**
-	 * @var string
-	 */
-	var $expresion_regular = null;
-
-/**
-	 * @var bool
-	 */
-	var $es_obligatorio = 0;
-
-	/**
-	 * @var numeric
-	 */
-	var $formulario_id = 0;
-
-
-	var $mensaje_validacion = null;
-
-	var $clase_adicional=null;
-
-	var $grupo=null;
+	
 	/**
 	 * Constructor
 	 *
 	 * @param object Database connector object
 	 */
-	function TableCampo(& $db) {
-		parent::__construct('#__campos', 'id', $db);
+	function TableDatos1(& $db) {
+		parent::__construct('datos1', 'id', $db);
 	}
 }
