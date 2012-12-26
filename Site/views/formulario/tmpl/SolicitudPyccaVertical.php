@@ -121,5 +121,5 @@ function myValidate(f) {
 <input type="hidden" name="formulario_id" value="<?php echo $this->formulario[0]->id; ?>" />
 <input type="hidden" name="task" value="grabar" />
 <input type="hidden" name="controller" value="formulario" />
-<input type="submit" name="btnGrabar" value="Enviar"  class="button validate" />
+<input type="submit" name="btnGrabar" value="Grabar"  class="button validate" />
 </form>
