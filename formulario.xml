@@ -8,7 +8,7 @@
       <copyright>Copyright Info</copyright>
       <license>License Info</license>
       <version>1.1BETA</version>
-      <description>Componente de validacie formularios</description>
+      <description>Componente de validacie formularios. Para completar la instalacion copie a mano el fichero validation.js en el directorio de joomla media/system/js/. Haga un respaldo del fichero de la instalacion original.</description>
       <files folder="Site">
       	    <filename>index.html</filename>
       	    <filename component="formulario.php">formulario.php</filename>

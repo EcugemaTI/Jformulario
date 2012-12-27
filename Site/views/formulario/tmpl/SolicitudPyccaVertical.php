@@ -3,10 +3,13 @@
 <?php
 JHTML::_('behavior.formvalidation');
 JHTML::_( 'behavior.modal' );
-
+JHTML::_('behavior.mootools');
 header('Content-type: text/html; charset=ISO-8859-15');
 
+$document =& JFactory::getDocument();
+$document ->addScript( '/components' . DS . 'com_formulario' . DS . 'js' .DS . 'validacion.js' );
 ?>
+
 <script language="javascript">
 function myValidate(f) {
 
@@ -27,12 +30,14 @@ function myValidate(f) {
 
 </script>
 
+
 <form action="index.php" method="post" name="adminForm" id="adminForm"  class="form-validate" onSubmit="return myValidate(this);">
 <input type="hidden" name="check" value="post"/>
 
 <div class="col100">
 	<fieldset class="adminform">
 		<legend><h1><?php echo JText::_($this->formulario[0]->titulo); ?></h1></legend>
+			<p>Estimado cliente, PYCCA ha puesto a disposici&oacute;n de Usted la Solicitud para Cr&eacute;dito Directo en internet. Para esto debe llenar por lo menos los casilleros obligatorios que se resaltan con un color como se muestra a continuaci&oacute;n.</p>
 <br /><br />
 <span name="errcupo" id="errcupo"></span>
 		<table  class="admintable" border="0" cellpadding="8px" >
@@ -67,12 +72,15 @@ function myValidate(f) {
 						<?php switch($row->tipo){
 							case 'lista':
 								$result = explode(',',$row->combo_datos);
-								$options[] = JHTML::_('select.option',0,'--','id','descripcion');
+								$options[] = JHTML::_('select.option',null,'--','id','descripcion');
 								foreach($result as $value) :
 									$result2 = explode('|',$value);
 									$options[] = JHTML::_('select.option',$result2[1],JText::_($result2[0]),'id','descripcion');
 								endforeach;
-								echo JHTML::_('select.genericlist',  $options, $row->nombre, "class=$clase_control" , 'id', 'descripcion');
+
+								echo '<input type="hidden"  class="' . $clase_control .'" name="' . $row->nombre . '" id="'. $row->nombre . '" size="32" value=""   />';
+								
+								echo JHTML::_('select.genericlist',  $options, 'cbx' . $row->nombre, " onclick=\"document.getElementById('" . $row->nombre  . "').value=this.options[this.selectedIndex].value;\""  , 'id', 'descripcion');
 								break;
 							case 'check':
 								$result = explode(',',$row->combo_datos);
@@ -91,7 +99,7 @@ function myValidate(f) {
 								break;
 							case 'texto': /* Caja de texto*/
 								?>
-								<input type="text"  class="<?php echo $clase_control;?>" name="<?php echo $row->nombre?>" id="<?php echo $row->nombre?>" size="32"  />
+								<input type="text"  class="<?php echo $clase_control;?>" name="<?php echo $row->nombre?>" id="<?php echo $row->nombre?>" size="32" value="" />
 
 						<?php
 								break;
@@ -121,5 +129,5 @@ function myValidate(f) {
 <input type="hidden" name="formulario_id" value="<?php echo $this->formulario[0]->id; ?>" />
 <input type="hidden" name="task" value="grabar" />
 <input type="hidden" name="controller" value="formulario" />
-<input type="submit" name="btnGrabar" value="Grabar"  class="button validate" />
+<p align="center"><input type="submit" name="btnGrabar" id="btnGrabar" value="Ingresar solicitud"  class="button validate BOTON"  /></p>
 </form>

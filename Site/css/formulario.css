@@ -34,3 +34,8 @@ span.msgerror {
   
 }
    
+
+INPUT.BOTON {
+	BACKGROUND: #045FB4; COLOR: #FFF; FONT-FAMILY: "Trebuchet MS", Verdana, Arial; FONT-SIZE: 12px; 
+	width:200px;
+}
