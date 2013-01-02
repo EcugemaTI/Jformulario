@@ -14,6 +14,7 @@
       	    <filename component="formulario.php">formulario.php</filename>
       	    <folder>views</folder>
 	    <folder>css</folder>
+	    <folder>js</folder>
       	    <folder>controllers</folder>
       	    <folder>sql</folder>
       	    <folder>models</folder>
